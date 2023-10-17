@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">percobaan_login</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="layanan">
+        Layanan Hubungi :
+        \n0812-1732-9234
+    </string>
+</resources>
