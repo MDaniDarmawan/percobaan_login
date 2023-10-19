@@ -8,8 +8,10 @@ import android.widget.EditText
 import android.widget.Toast
 import android.content.Intent
 import android.os.PersistableBundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.percobaan_login.databinding.FragmentLoginBinding
+import com.example.percobaan_login.databinding.FragmentRegisterBinding
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
    lateinit var email : EditText
     lateinit var pass: EditText
     lateinit var button: Button
+    lateinit var textView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
         email = binding.etEmail
         pass = binding.etKataSandi
         button = binding.tombolMasuk
+        textView = binding.pertanyaanDaftar
 
         binding.tombolMasuk.setOnClickListener(View.OnClickListener {
             if (email.text.toString() == "user" && pass.text.toString() == "1234") {
@@ -41,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
             }
         })
         binding.pertanyaanDaftar.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         })
     }

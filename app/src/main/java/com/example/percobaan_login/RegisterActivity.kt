@@ -16,7 +16,6 @@ import com.google.android.material.textfield.TextInputLayout
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener,
     View.OnKeyListener {
-
     private lateinit var mBinding: FragmentRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,88 +81,87 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         if (value.isEmpty()) {
             showError(mBinding.tilKataSandi, "isi konfirmasi Password")
             return false
-        }
-            else if (value.length < 8) {
-                showError(mBinding.tilKonfirmasiKataSandi, "Password konfirmasi Minimal 8 Karakter")
-                return false
-            }
-        clearError(mBinding.tilKonfirmasiKataSandi)
-        return true
-
-    private fun validatePasswordAndConfirmPassword(): Boolean {
-        val password = mBinding.etKataSandi.text.toString()
-        val confirmPassword = mBinding.etKonfirmasiKataSandi.text.toString()
-        if (password != confirmPassword) {
-            showError(mBinding.tilKonfirmasiKataSandi, "Password tidak sesuai")
+        } else if (value.length < 8) {
+            showError(mBinding.tilKonfirmasiKataSandi, "Password konfirmasi Minimal 8 Karakter")
             return false
         }
         clearError(mBinding.tilKonfirmasiKataSandi)
         return true
     }
+        private fun validatePasswordAndConfirmPassword(): Boolean {
+            val password = mBinding.etKataSandi.text.toString()
+            val confirmPassword = mBinding.etKonfirmasiKataSandi.text.toString()
+            if (password != confirmPassword) {
+                showError(mBinding.tilKonfirmasiKataSandi, "Password tidak sesuai")
+                return false
+            }
+            clearError(mBinding.tilKonfirmasiKataSandi)
+            return true
+        }
 
-    override fun onClick(view: View?) {
-        // Handle button clicks or other UI interactions here
-    }
+        override fun onClick(view: View?) {
+            // Handle button clicks or other UI interactions here
+        }
 
-    override fun onFocusChange(view: View?, hasFocus: Boolean) {
-        if (view != null) {
-            when (view.id) {
-                R.id.et_nama_lengkap -> {
-                    if (hasFocus && mBinding.tilNamaLengkap.isErrorEnabled) {
-                        clearError(mBinding.tilNamaLengkap)
-                    } else {
-                        validateFullName()
+        override fun onFocusChange(view: View?, hasFocus: Boolean) {
+            if (view != null) {
+                when (view.id) {
+                    R.id.et_nama_lengkap -> {
+                        if (hasFocus && mBinding.tilNamaLengkap.isErrorEnabled) {
+                            clearError(mBinding.tilNamaLengkap)
+                        } else {
+                            validateFullName()
+                        }
                     }
-                }
 
-                R.id.et_email -> {
-                    if (hasFocus && mBinding.tilEmail.isErrorEnabled) {
-                        clearError(mBinding.tilEmail)
-                    } else {
-                        validateEmail()
+                    R.id.et_email -> {
+                        if (hasFocus && mBinding.tilEmail.isErrorEnabled) {
+                            clearError(mBinding.tilEmail)
+                        } else {
+                            validateEmail()
+                        }
                     }
-                }
 
-                R.id.et_kata_sandi -> {
-                    if (hasFocus && mBinding.tilKataSandi.isErrorEnabled) {
-                        clearError(mBinding.tilKataSandi)
-                    } else {
-                        if (validatePassword() && mBinding.etKonfirmasiKataSandi.text!!.isNotEmpty() &&
-                            validateConfirmPassword() && validatePasswordAndConfirmPassword()
-                        ) {
-                            if (mBinding.tilKonfirmasiKataSandi.isErrorEnabled) {
-                                clearError(mBinding.tilKonfirmasiKataSandi)
-                            }
-                            mBinding.tilKonfirmasiKataSandi.apply {
-                                setStartIconDrawable(R.drawable.baseline_check_circle_24)
-                                setStartIconTintList(ColorStateList.valueOf(Color.GREEN))
+                    R.id.et_kata_sandi -> {
+                        if (hasFocus && mBinding.tilKataSandi.isErrorEnabled) {
+                            clearError(mBinding.tilKataSandi)
+                        } else {
+                            if (validatePassword() && mBinding.etKonfirmasiKataSandi.text!!.isNotEmpty() &&
+                                validateConfirmPassword() && validatePasswordAndConfirmPassword()
+                            ) {
+                                if (mBinding.tilKonfirmasiKataSandi.isErrorEnabled) {
+                                    clearError(mBinding.tilKonfirmasiKataSandi)
+                                }
+                                mBinding.tilKonfirmasiKataSandi.apply {
+                                    setStartIconDrawable(R.drawable.baseline_check_circle_24)
+                                    setStartIconTintList(ColorStateList.valueOf(Color.GREEN))
+                                }
                             }
                         }
                     }
-                }
 
-                R.id.et_konfirmasi_kata_sandi -> {
-                    if (hasFocus && mBinding.tilKonfirmasiKataSandi.isErrorEnabled) {
-                        clearError(mBinding.tilKonfirmasiKataSandi)
-                    } else {
-                        if (validateConfirmPassword() && validatePassword() && validatePasswordAndConfirmPassword()) {
-                            if (mBinding.tilKonfirmasiKataSandi.isErrorEnabled) {
-                                clearError(mBinding.tilKonfirmasiKataSandi)
-                            }
-                            mBinding.tilKonfirmasiKataSandi.apply {
-                                setStartIconDrawable(R.drawable.baseline_check_circle_24)
-                                setStartIconTintList(ColorStateList.valueOf(Color.GREEN))
+                    R.id.et_konfirmasi_kata_sandi -> {
+                        if (hasFocus && mBinding.tilKonfirmasiKataSandi.isErrorEnabled) {
+                            clearError(mBinding.tilKonfirmasiKataSandi)
+                        } else {
+                            if (validateConfirmPassword() && validatePassword() && validatePasswordAndConfirmPassword()) {
+                                if (mBinding.tilKonfirmasiKataSandi.isErrorEnabled) {
+                                    clearError(mBinding.tilKonfirmasiKataSandi)
+                                }
+                                mBinding.tilKonfirmasiKataSandi.apply {
+                                    setStartIconDrawable(R.drawable.baseline_check_circle_24)
+                                    setStartIconTintList(ColorStateList.valueOf(Color.GREEN))
+                                }
                             }
                         }
                     }
                 }
             }
         }
-    }
 
-    override fun onKey(view: View?, event: Int, keyEvent: KeyEvent?): Boolean {
-        // Handle key events, e.g., Enter key
-        return false
+        override fun onKey(view: View?, event: Int, keyEvent: KeyEvent?): Boolean {
+            // Handle key events, e.g., Enter key
+            return false
         }
 
-}
+    }
