@@ -1,10 +1,5 @@
 package com.example.percobaan_login
 
-class RegisterActivity {
-}
-
-package com.example.mynhcare
-
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -16,23 +11,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
-import com.example.mynhcare.databinding.ActivityRegisterBinding
+import com.example.percobaan_login.databinding.FragmentRegisterBinding
 import com.google.android.material.textfield.TextInputLayout
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener,
     View.OnKeyListener {
 
-    private lateinit var mBinding: ActivityRegisterBinding
+    private lateinit var mBinding: FragmentRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = ActivityRegisterBinding.inflate(LayoutInflater.from(this))
+        mBinding = FragmentRegisterBinding.inflate(LayoutInflater.from(this))
         setContentView(mBinding.root)
 
-        mBinding.FullNameEt.onFocusChangeListener = this
-        mBinding.EmailEt.onFocusChangeListener = this
-        mBinding.PasswordEt.onFocusChangeListener = this
-        mBinding.ConfirmPasswordEt.onFocusChangeListener = this
+        mBinding.etNamaLengkap.onFocusChangeListener = this
+        mBinding.etEmail.onFocusChangeListener = this
+        mBinding.etKataSandi.onFocusChangeListener = this
+        mBinding.etKonfirmasiKataSandi.onFocusChangeListener = this
     }
 
     private fun showError(binding: TextInputLayout, errorMessage: String) {
@@ -47,63 +42,62 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
     }
 
     private fun validateFullName(): Boolean {
-        val value = mBinding.FullNameEt.text.toString()
+        val value = mBinding.etNamaLengkap.text.toString()
         if (value.isEmpty()) {
-            showError(mBinding.FullNameTil, "Nama lengkap diperlukan")
+            showError(mBinding.tilKataSandi, "Nama lengkap diperlukan")
             return false
         }
-        clearError(mBinding.FullNameTil)
+        clearError(mBinding.tilNamaLengkap)
         return true
     }
 
     private fun validateEmail(): Boolean {
-        val value = mBinding.EmailEt.text.toString()
+        val value = mBinding.etEmail.text.toString()
         if (value.isEmpty()) {
-            showError(mBinding.EmailTil, "Email diperlukan")
+            showError(mBinding.tilEmail, "Email diperlukan")
             return false
         } else if (!Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
-            showError(mBinding.EmailTil, "Email tidak valid")
+            showError(mBinding.tilEmail, "Email tidak valid")
             return false
         }
-        clearError(mBinding.EmailTil)
+        clearError(mBinding.tilEmail)
         return true
     }
 
     private fun validatePassword(): Boolean {
-        val value = mBinding.PasswordEt.text.toString()
+        val value = mBinding.etKataSandi.text.toString()
         if (value.isEmpty()) {
-            showError(mBinding.PasswordTil, "Isi Password terlebih dahulu")
+            showError(mBinding.tilKataSandi, "Isi Password terlebih dahulu")
             return false
         } else if (value.length < 8) {
-            showError(mBinding.PasswordTil, "Password Minimal 8 Karakter")
+            showError(mBinding.tilKataSandi, "Password Minimal 8 Karakter")
             return false
         }
-        clearError(mBinding.PasswordTil)
+        clearError(mBinding.tilKataSandi)
         return true
     }
 
     private fun validateConfirmPassword(): Boolean {
-        val value = mBinding.ConfirmPasswordEt.text.toString()
+        val value = mBinding.etKonfirmasiKataSandi.text.toString()
         if (value.isEmpty()) {
-            showError(mBinding.ConfirmPasswordTil, "isi konfirmasi Password")
+            showError(mBinding.tilKataSandi, "isi konfirmasi Password")
             return false
         }
-//            else if (value.length < 8) {
-//                showError(mBinding.ConfirmPasswordTil, "Password konfirmasi Minimal 8 Karakter")
-//                return false
-//            }
-        clearError(mBinding.ConfirmPasswordTil)
+            else if (value.length < 8) {
+                showError(mBinding.tilKonfirmasiKataSandi, "Password konfirmasi Minimal 8 Karakter")
+                return false
+            }
+        clearError(mBinding.tilKonfirmasiKataSandi)
         return true
-    }
 
     private fun validatePasswordAndConfirmPassword(): Boolean {
-        val password = mBinding.PasswordEt.text.toString()
-        val confirmPassword = mBinding.ConfirmPasswordEt.text.toString()
+        val password = mBinding.etKataSandi.text.toString()
+        val confirmPassword = mBinding.etKonfirmasiKataSandi.text.toString()
         if (password != confirmPassword) {
-            showError(mBinding.ConfirmPasswordTil, "Password tidak sesuai")
+            showError(mBinding.tilKonfirmasiKataSandi, "Password tidak sesuai")
             return false
         }
-        clearError(mBinding.ConfirmPasswordTil)
+        clearError(mBinding.tilKonfirmasiKataSandi)
         return true
     }
 
@@ -114,33 +108,33 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
         if (view != null) {
             when (view.id) {
-                R.id.FullNameEt -> {
-                    if (hasFocus && mBinding.FullNameTil.isErrorEnabled) {
-                        clearError(mBinding.FullNameTil)
+                R.id.et_nama_lengkap -> {
+                    if (hasFocus && mBinding.tilNamaLengkap.isErrorEnabled) {
+                        clearError(mBinding.tilNamaLengkap)
                     } else {
                         validateFullName()
                     }
                 }
 
-                R.id.EmailEt -> {
-                    if (hasFocus && mBinding.EmailTil.isErrorEnabled) {
-                        clearError(mBinding.EmailTil)
+                R.id.et_email -> {
+                    if (hasFocus && mBinding.tilEmail.isErrorEnabled) {
+                        clearError(mBinding.tilEmail)
                     } else {
                         validateEmail()
                     }
                 }
 
-                R.id.PasswordEt -> {
-                    if (hasFocus && mBinding.PasswordTil.isErrorEnabled) {
-                        clearError(mBinding.PasswordTil)
+                R.id.et_kata_sandi -> {
+                    if (hasFocus && mBinding.tilKataSandi.isErrorEnabled) {
+                        clearError(mBinding.tilKataSandi)
                     } else {
-                        if (validatePassword() && mBinding.ConfirmPasswordEt.text!!.isNotEmpty() &&
+                        if (validatePassword() && mBinding.etKonfirmasiKataSandi.text!!.isNotEmpty() &&
                             validateConfirmPassword() && validatePasswordAndConfirmPassword()
                         ) {
-                            if (mBinding.ConfirmPasswordTil.isErrorEnabled) {
-                                clearError(mBinding.ConfirmPasswordTil)
+                            if (mBinding.tilKonfirmasiKataSandi.isErrorEnabled) {
+                                clearError(mBinding.tilKonfirmasiKataSandi)
                             }
-                            mBinding.ConfirmPasswordTil.apply {
+                            mBinding.tilKonfirmasiKataSandi.apply {
                                 setStartIconDrawable(R.drawable.baseline_check_circle_24)
                                 setStartIconTintList(ColorStateList.valueOf(Color.GREEN))
                             }
@@ -148,15 +142,15 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
                     }
                 }
 
-                R.id.ConfirmPasswordEt -> {
-                    if (hasFocus && mBinding.ConfirmPasswordTil.isErrorEnabled) {
-                        clearError(mBinding.ConfirmPasswordTil)
+                R.id.et_konfirmasi_kata_sandi -> {
+                    if (hasFocus && mBinding.tilKonfirmasiKataSandi.isErrorEnabled) {
+                        clearError(mBinding.tilKonfirmasiKataSandi)
                     } else {
                         if (validateConfirmPassword() && validatePassword() && validatePasswordAndConfirmPassword()) {
-                            if (mBinding.ConfirmPasswordTil.isErrorEnabled) {
-                                clearError(mBinding.ConfirmPasswordTil)
+                            if (mBinding.tilKonfirmasiKataSandi.isErrorEnabled) {
+                                clearError(mBinding.tilKonfirmasiKataSandi)
                             }
-                            mBinding.ConfirmPasswordTil.apply {
+                            mBinding.tilKonfirmasiKataSandi.apply {
                                 setStartIconDrawable(R.drawable.baseline_check_circle_24)
                                 setStartIconTintList(ColorStateList.valueOf(Color.GREEN))
                             }
