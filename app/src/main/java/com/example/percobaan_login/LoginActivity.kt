@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import android.content.Intent
 import android.os.PersistableBundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.percobaan_login.databinding.FragmentLoginBinding
 
@@ -17,6 +18,7 @@ class LoginActivity : AppCompatActivity() {
 
    lateinit var email : EditText
     lateinit var pass: EditText
+    lateinit var daftar : TextView
     lateinit var button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,9 +31,10 @@ class LoginActivity : AppCompatActivity() {
         email = binding.etEmail
         pass = binding.etKataSandi
         button = binding.tombolMasuk
+        daftar = binding.pertanyaanDaftar
 
         binding.tombolMasuk.setOnClickListener(View.OnClickListener {
-            if (email.text.toString() == "user" && pass.text.toString() == "1234") {
+           if (email.text.toString() == "user" && pass.text.toString() == "1234") {
                 Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, MainActivity::class.java)
@@ -40,8 +43,9 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show()
             }
         })
+
         binding.pertanyaanDaftar.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         })
     }

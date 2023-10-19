@@ -23,6 +23,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         super.onCreate(savedInstanceState)
         mBinding = FragmentRegisterBinding.inflate(LayoutInflater.from(this))
         setContentView(mBinding.root)
+        supportActionBar?.hide()
 
         mBinding.etNamaLengkap.onFocusChangeListener = this
         mBinding.etEmail.onFocusChangeListener = this
@@ -82,32 +83,32 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         if (value.isEmpty()) {
             showError(mBinding.tilKataSandi, "isi konfirmasi Password")
             return false
-        }
-            else if (value.length < 8) {
-                showError(mBinding.tilKonfirmasiKataSandi, "Password konfirmasi Minimal 8 Karakter")
-                return false
-            }
-        clearError(mBinding.tilKonfirmasiKataSandi)
-        return true
-
-    private fun validatePasswordAndConfirmPassword(): Boolean {
-        val password = mBinding.etKataSandi.text.toString()
-        val confirmPassword = mBinding.etKonfirmasiKataSandi.text.toString()
-        if (password != confirmPassword) {
-            showError(mBinding.tilKonfirmasiKataSandi, "Password tidak sesuai")
+        } else if (value.length < 8) {
+            showError(mBinding.tilKonfirmasiKataSandi, "Password konfirmasi Minimal 8 Karakter")
             return false
         }
         clearError(mBinding.tilKonfirmasiKataSandi)
         return true
     }
+        private fun validatePasswordAndConfirmPassword(): Boolean {
+            val password = mBinding.etKataSandi.text.toString()
+            val confirmPassword = mBinding.etKonfirmasiKataSandi.text.toString()
+            if (password != confirmPassword) {
+                showError(mBinding.tilKonfirmasiKataSandi, "Password tidak sesuai")
+                return false
+            }
+            clearError(mBinding.tilKonfirmasiKataSandi)
+            return true
+        }
 
-    override fun onClick(view: View?) {
-        // Handle button clicks or other UI interactions here
+    override fun onClick(v: View?) {
+        TODO("Not yet implemented")
     }
 
-    override fun onFocusChange(view: View?, hasFocus: Boolean) {
-        if (view != null) {
-            when (view.id) {
+    override fun onFocusChange(v: View?, hasFocus: Boolean) {
+        TODO("Not yet implemented")
+        if (v != null) {
+            when (v.id) {
                 R.id.et_nama_lengkap -> {
                     if (hasFocus && mBinding.tilNamaLengkap.isErrorEnabled) {
                         clearError(mBinding.tilNamaLengkap)
@@ -161,9 +162,11 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, View.OnFocus
         }
     }
 
-    override fun onKey(view: View?, event: Int, keyEvent: KeyEvent?): Boolean {
-        // Handle key events, e.g., Enter key
-        return false
+        override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+            if (v != null && event?.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                // Handle the Enter key press event here, e.g., initiate registration
+                return true
+            }
+            return false
         }
-
-}
+    }
