@@ -1,10 +1,12 @@
-package com.example.percobaan_login
+package com.example.percobaan_login.ui.splashscreen
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.example.percobaan_login.R
+import com.example.percobaan_login.ui.login.LoginActivity
 
 class Splash : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,6 +1,5 @@
-package com.example.percobaan_login
+package com.example.percobaan_login.ui.register
 
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +8,7 @@ import android.util.Patterns
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
+import com.example.percobaan_login.R
 import com.example.percobaan_login.databinding.FragmentRegisterBinding
 import com.google.android.material.textfield.TextInputLayout
 

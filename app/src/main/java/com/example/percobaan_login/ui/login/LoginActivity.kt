@@ -1,4 +1,4 @@
-package com.example.percobaan_login
+package com.example.percobaan_login.ui.login
 
 
 import android.os.Bundle
@@ -7,8 +7,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import android.content.Intent
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.percobaan_login.MainActivity
 import com.example.percobaan_login.databinding.FragmentLoginBinding
 
 class LoginActivity : AppCompatActivity() {

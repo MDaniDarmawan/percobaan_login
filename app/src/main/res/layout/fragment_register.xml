@@ -120,8 +120,8 @@
                         android:id="@+id/et_kata_sandi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Masukkan Kata Sandi"
-                        android:fontFamily="@font/poppins_mediumitalic"/>
+                        android:fontFamily="@font/poppins_mediumitalic"
+                        android:hint="Masukkan Kata Sandi" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
